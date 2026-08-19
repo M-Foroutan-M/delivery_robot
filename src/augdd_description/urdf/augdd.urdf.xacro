@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<robot name="augdd" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- =========================================================
+       AUGDD simplified simulation model
+       Dimensions/mass taken from AUGDD Formal Proposal (Summer 25):
+         514mm (L) x 494mm (W) x 455mm (H), target weight 25-30 kg
+       Simplification: box chassis, 4 cylindrical wheels.
+       Front wheels = driven (differential drive).
+       Rear wheels  = free-spinning casters (passive, for stability).
+       This is documented as a modeling assumption in the paper.
+       ========================================================= -->
+
+  <xacro:property name="chassis_length" value="0.514"/>
+  <xacro:property name="chassis_width"  value="0.494"/>
+  <xacro:property name="chassis_height" value="0.30"/> <!-- body only, doors/roof excluded -->
+  <xacro:property name="chassis_mass"   value="27.0"/>
+
+  <xacro:property name="wheel_radius"   value="0.075"/>
+  <xacro:property name="wheel_width"    value="0.05"/>
+  <xacro:property name="wheel_mass"     value="1.0"/>
+
+  <xacro:property name="wheel_x_offset" value="0.19"/>  <!-- front/rear from center -->
+  <xacro:property name="wheel_y_offset" value="0.25"/>  <!-- half track width -->
+  <xacro:property name="wheel_z"        value="0.0"/>
+
+  <material name="augdd_white"><color rgba="0.9 0.9 0.9 1.0"/></material>
+  <material name="augdd_grey"><color rgba="0.3 0.3 0.3 1.0"/></material>
+  <material name="augdd_black"><color rgba="0.05 0.05 0.05 1.0"/></material>
+
+  <!-- ============ base_footprint / base_link ============ -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+      <material name="augdd_white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
+      <mass value="${chassis_mass}"/>
+      <inertia ixx="0.6" ixy="0.0" ixz="0.0" iyy="0.7" iyz="0.0" izz="0.9"/>
+    </inertial>
+  </link>
+
+  <!-- ============ wheel macro ============ -->
+  <xacro:macro name="wheel" params="prefix x_reflect y_reflect joint_type">
+    <link name="${prefix}_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
+        <material name="augdd_black"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_wheel_joint" type="${joint_type}">
+      <parent link="base_link"/>
+      <child link="${prefix}_wheel_link"/>
+      <origin xyz="${x_reflect*wheel_x_offset} ${y_reflect*wheel_y_offset} ${wheel_z}" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <xacro:if value="${joint_type == 'continuous'}">
+        <limit effort="10" velocity="10"/>
+      </xacro:if>
+    </joint>
+  </xacro:macro>
+
+  <!-- front wheels: driven -->
+  <xacro:wheel prefix="front_left"  x_reflect="1"  y_reflect="1"  joint_type="continuous"/>
+  <xacro:wheel prefix="front_right" x_reflect="1"  y_reflect="-1" joint_type="continuous"/>
+  <!-- rear wheels: passive casters -->
+  <xacro:wheel prefix="rear_left"   x_reflect="-1" y_reflect="1"  joint_type="continuous"/>
+  <xacro:wheel prefix="rear_right"  x_reflect="-1" y_reflect="-1" joint_type="continuous"/>
+
+  <!-- ============ 2D LiDAR ============ -->
+  <link name="lidar_link">
+    <visual>
+      <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+      <material name="augdd_grey"/>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.15 0 ${chassis_height + 0.02}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============ IMU (for odom fusion, future use) ============ -->
+  <link name="imu_link">
+    <visual><geometry><box size="0.02 0.02 0.01"/></geometry></visual>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============ Gazebo plugins ============ -->
+  <gazebo>
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+      <left_joint>front_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <wheel_separation>${2*wheel_y_offset}</wheel_separation>
+      <wheel_diameter>${2*wheel_radius}</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>2.0</max_wheel_acceleration>
+      <command_topic>cmd_vel</command_topic>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
+    <sensor type="ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- rear caster friction reduction so they don't fight the diff drive -->
+  <gazebo reference="rear_left_wheel_link">
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+  </gazebo>
+  <gazebo reference="rear_right_wheel_link">
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+  </gazebo>
+  <gazebo reference="front_left_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+  <gazebo reference="front_right_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+</robot>
