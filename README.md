@@ -1,4 +1,4 @@
-# AUGDD ROS2 Simulation — 2-Day Build Guide
+# AUGDD ROS2 Simulation
 
 Target environment: **Ubuntu 22.04 + ROS2 Humble + Gazebo Classic 11**.
 (If you're on Jazzy/Gazebo Sim/Ignition instead, the diff_drive/lidar plugin
