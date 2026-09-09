@@ -1,0 +1,12 @@
+[INFO] [1788961585.901929248] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1788961585.902003651] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1788961585.961053793] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1788961586.542677229] [rviz2]: Trying to create a map of size 240 x 204 using 1 swatches
+[INFO] [1788961587.117589237] [rviz]: Message Filter dropping message: frame 'lidar_link' at time 3.671 for reason 'discarding message because the queue is full'
+[INFO] [1788961588.143908085] [rviz2]: Trying to create a map of size 80 x 80 using 1 swatches
+[INFO] [1788961589.200094411] [rviz2]: Trying to create a map of size 240 x 204 using 1 swatches
+Start navigation
+[INFO] [1788961591.433648724] [rviz_navigation_dialog_action_client]: NavigateToPose will be called using the BT Navigator's default behavior tree.
+[INFO] [1788961595.946949685] [rviz]: Message Filter dropping message: frame 'odom' at time 4.400 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1788961596.025499642] [rviz]: Message Filter dropping message: frame 'odom' at time 4.481 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1788961596.835881548] [rviz]: Message Filter dropping message: frame 'lidar_link' at time 4.371 for reason 'the timestamp on the message is earlier than all the data in the transform cache'

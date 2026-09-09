@@ -1,0 +1,2 @@
+planner,start_x,start_y,goal_x,goal_y,time_to_goal_s,path_length_m,success
+dwb,4.08799,8.31414,-4.81866,-0.0987258,75.053,0.305,False

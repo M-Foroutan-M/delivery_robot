@@ -1,0 +1,29 @@
+[INFO] [launch]: All log files can be found below /home/legion/.ros/log/2026-09-09-14-46-20-234524-legion-14701
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [14712]
+[INFO] [gzclient-2]: process started with pid [14714]
+[INFO] [robot_state_publisher-3]: process started with pid [14716]
+[INFO] [spawn_entity.py-4]: process started with pid [14718]
+[robot_state_publisher-3] [INFO] [1788961580.935724467] [robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-3] [INFO] [1788961580.935857932] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-3] [INFO] [1788961580.935867637] [robot_state_publisher]: got segment front_left_wheel_link
+[robot_state_publisher-3] [INFO] [1788961580.935887322] [robot_state_publisher]: got segment front_right_wheel_link
+[robot_state_publisher-3] [INFO] [1788961580.935892394] [robot_state_publisher]: got segment imu_link
+[robot_state_publisher-3] [INFO] [1788961580.935896671] [robot_state_publisher]: got segment lidar_link
+[robot_state_publisher-3] [INFO] [1788961580.935900920] [robot_state_publisher]: got segment rear_left_wheel_link
+[robot_state_publisher-3] [INFO] [1788961580.935905298] [robot_state_publisher]: got segment rear_right_wheel_link
+[spawn_entity.py-4] [INFO] [1788961581.254907052] [spawn_entity]: Spawn Entity started
+[spawn_entity.py-4] [INFO] [1788961581.255215874] [spawn_entity]: Loading entity published on topic robot_description
+[spawn_entity.py-4] [INFO] [1788961581.256537372] [spawn_entity]: Waiting for entity xml on robot_description
+[spawn_entity.py-4] [INFO] [1788961581.267619029] [spawn_entity]: Waiting for service /spawn_entity, timeout = 30
+[spawn_entity.py-4] [INFO] [1788961581.267909674] [spawn_entity]: Waiting for service /spawn_entity
+[spawn_entity.py-4] [INFO] [1788961582.271812630] [spawn_entity]: Calling service /spawn_entity
+[spawn_entity.py-4] [INFO] [1788961582.564603106] [spawn_entity]: Spawn status: SpawnEntity: Successfully spawned entity [augdd]
+[gzserver-1] [INFO] [1788961582.684459620] [diff_drive_controller]: Wheel pair 1 separation set to [0.500000m]
+[gzserver-1] [INFO] [1788961582.684922765] [diff_drive_controller]: Wheel pair 1 diameter set to [0.150000m]
+[gzserver-1] [INFO] [1788961582.685913203] [diff_drive_controller]: Subscribed to [/cmd_vel]
+[gzserver-1] [INFO] [1788961582.688371719] [diff_drive_controller]: Advertise odometry on [/odom]
+[gzserver-1] [INFO] [1788961582.690733649] [diff_drive_controller]: Publishing odom transforms between [odom] and [base_footprint]
+[gzserver-1] [INFO] [1788961582.690761961] [diff_drive_controller]: Publishing wheel transforms between [base_footprint], [front_left_wheel_joint] and [front_right_wheel_joint]
+[INFO] [spawn_entity.py-4]: process has finished cleanly [pid 14718]
+[INFO] [gzclient-2]: process has finished cleanly [pid 14714]

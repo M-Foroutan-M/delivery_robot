@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/opt/ros/humble/_local_setup_util.py", line 422, in <module>
+    rc = main()
+  File "/opt/ros/humble/_local_setup_util.py", line 76, in main
+    for line in get_commands(
+  File "/opt/ros/humble/_local_setup_util.py", line 199, in get_commands
+    commands += process_dsv_file(
+  File "/opt/ros/humble/_local_setup_util.py", line 269, in process_dsv_file
+    commands += process_dsv_file(
+  File "/opt/ros/humble/_local_setup_util.py", line 269, in process_dsv_file
+    commands += process_dsv_file(
+  File "/opt/ros/humble/_local_setup_util.py", line 224, in process_dsv_file
+    with open(dsv_path, 'r') as h:
+  File "/usr/lib/python3.10/codecs.py", line 309, in __init__
+    def __init__(self, errors='strict'):
+KeyboardInterrupt

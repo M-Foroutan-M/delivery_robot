@@ -1,0 +1,33 @@
+[INFO] [launch]: All log files can be found below /home/legion/.ros/log/2026-09-08-15-35-08-441501-legion-131954
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gzserver-1]: process started with pid [131965]
+[INFO] [gzclient-2]: process started with pid [131967]
+[INFO] [robot_state_publisher-3]: process started with pid [131969]
+[INFO] [spawn_entity.py-4]: process started with pid [131971]
+[robot_state_publisher-3] [INFO] [1788878109.122722456] [robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-3] [INFO] [1788878109.122827040] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-3] [INFO] [1788878109.122835696] [robot_state_publisher]: got segment front_left_wheel_link
+[robot_state_publisher-3] [INFO] [1788878109.122841162] [robot_state_publisher]: got segment front_right_wheel_link
+[robot_state_publisher-3] [INFO] [1788878109.122864111] [robot_state_publisher]: got segment imu_link
+[robot_state_publisher-3] [INFO] [1788878109.122868506] [robot_state_publisher]: got segment lidar_link
+[robot_state_publisher-3] [INFO] [1788878109.122872767] [robot_state_publisher]: got segment rear_left_wheel_link
+[robot_state_publisher-3] [INFO] [1788878109.122877221] [robot_state_publisher]: got segment rear_right_wheel_link
+[spawn_entity.py-4] [INFO] [1788878109.435160294] [spawn_entity]: Spawn Entity started
+[spawn_entity.py-4] [INFO] [1788878109.435488161] [spawn_entity]: Loading entity published on topic robot_description
+[spawn_entity.py-4] [INFO] [1788878109.437008344] [spawn_entity]: Waiting for entity xml on robot_description
+[spawn_entity.py-4] [INFO] [1788878109.448000894] [spawn_entity]: Waiting for service /spawn_entity, timeout = 30
+[spawn_entity.py-4] [INFO] [1788878109.448402822] [spawn_entity]: Waiting for service /spawn_entity
+[spawn_entity.py-4] [INFO] [1788878110.452990322] [spawn_entity]: Calling service /spawn_entity
+[spawn_entity.py-4] [INFO] [1788878110.717609688] [spawn_entity]: Spawn status: SpawnEntity: Successfully spawned entity [augdd]
+[gzserver-1] [INFO] [1788878110.848767960] [diff_drive_controller]: Wheel pair 1 separation set to [0.500000m]
+[gzserver-1] [INFO] [1788878110.849097463] [diff_drive_controller]: Wheel pair 1 diameter set to [0.150000m]
+[gzserver-1] [INFO] [1788878110.850328046] [diff_drive_controller]: Subscribed to [/cmd_vel]
+[gzserver-1] [INFO] [1788878110.852638008] [diff_drive_controller]: Advertise odometry on [/odom]
+[INFO] [spawn_entity.py-4]: process has finished cleanly [pid 131971]
+[gzserver-1] [INFO] [1788878110.855621868] [diff_drive_controller]: Publishing odom transforms between [odom] and [base_footprint]
+[gzserver-1] [INFO] [1788878110.855659261] [diff_drive_controller]: Publishing wheel transforms between [base_footprint], [front_left_wheel_joint] and [front_right_wheel_joint]
+[INFO] [gzclient-2]: process has finished cleanly [pid 131967]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-3] [INFO] [1788878219.110744287] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [robot_state_publisher-3]: process has finished cleanly [pid 131969]
+[INFO] [gzserver-1]: process has finished cleanly [pid 131965]

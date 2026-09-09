@@ -1,0 +1,11 @@
+[INFO] [1788961462.838604954] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1788961462.838686243] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1788961462.904717534] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1788961463.143852654] [rviz2]: Trying to create a map of size 240 x 204 using 1 swatches
+[INFO] [1788961464.109554422] [rviz]: Message Filter dropping message: frame 'lidar_link' at time 2.576 for reason 'discarding message because the queue is full'
+[INFO] [1788961464.303471602] [rviz2]: Trying to create a map of size 80 x 80 using 1 swatches
+[INFO] [1788961465.455968771] [rviz2]: Trying to create a map of size 240 x 204 using 1 swatches
+[INFO] [1788961472.726928107] [rviz]: Message Filter dropping message: frame 'odom' at time 3.146 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1788961472.730006561] [rviz]: Message Filter dropping message: frame 'odom' at time 3.100 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1788961473.223152746] [rviz]: Message Filter dropping message: frame 'lidar_link' at time 2.676 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1788961548.482658007] [rclcpp]: signal_handler(SIGINT/SIGTERM)
